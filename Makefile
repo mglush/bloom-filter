@@ -25,19 +25,19 @@ tests: ${BLOOMBINARIES} ${HASHBINARIES}
 	./testHashTable2
 
 testBloomFilter1: testBloomFilter1.o BloomFilter.o HashTable.o testFramework.o
-	${CXX} $^ -o $@
+	${CXX} ${CXXFLAGS} $^ -o $@
 
 testBloomFilter2: testBloomFilter2.o BloomFilter.o HashTable.o testFramework.o
-	${CXX} $^ -o $@
+	${CXX} ${CXXFLAGS} $^ -o $@
 
 testBloomFilter3: testBloomFilter3.o BloomFilter.o HashTable.o testFramework.o
-	${CXX} $^ -o $@
+	${CXX} ${CXXFLAGS} $^ -o $@
 
 testHashTable1: testHashTable1.o HashTable.o testFramework.o
-	${CXX} $^ -o $@
+	${CXX} ${CXXFLAGS} $^ -o $@
 
 testHashTable2: testHashTable2.o HashTable.o testFramework.o
-	${CXX} $^ -o $@
+	${CXX} ${CXXFLAGS} $^ -o $@
 
 clean:
 	/bin/rm -f ${BLOOMBINARIES} ${HASHBINARIES} PA01 *.o
