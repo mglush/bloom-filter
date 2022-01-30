@@ -3,6 +3,7 @@
 
 #include <string>
 #include <sstream>
+#include <vector>
 
 class BloomFilter {
     public:
@@ -15,15 +16,15 @@ class BloomFilter {
         // family of hash functions.
         // the index specifies which hash function should be used.
         // takes a string or an unsigned int as the element to hash.
-        int BloomFilter::hash(std::string element, int index);
-        int BloomFilter::hash(unsigned int element, int index);
+        int hash(std::string element, int index) const;
+        int hash(unsigned int element, int index) const;
 
         // insert a string into the BloomFilter.
         void insert(std::string element);
 
         // string to integer conversion.
         // necessary to run the hash functions on the element.
-        unsigned int strToInt(std::string element);
+        unsigned int strToInt(std::string element) const;
         
         // delete a string from the BloomFilter.
         // the function uses HashTable removedElements.
@@ -38,7 +39,7 @@ class BloomFilter {
         // p := probability of a false positive.
         // m := expected number of strings to be inserted.
         // c := scale factor of the bloom filter size.
-        int BloomFilter::bloomFilterSize(double p, int m, float c);
+        int bloomFilterSize(double p, int m, float c) const;
 
         // computes the number of hash functions to use based on the
         // BloomFilter size, and the expected num of strings to be inserted.
@@ -53,6 +54,6 @@ class BloomFilter {
     private:
         std::vector<bool> bitArray; // the actual bloom filter array (std::vector<bool> functions like std::bitset)
         std::vector<int> hashParameters; // contains n parameters for the n hash functions we need
-}
+};
 
 #endif // BLOOM_FILTER_H

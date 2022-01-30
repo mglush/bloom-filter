@@ -13,14 +13,14 @@ BloomFilter::BloomFilter(double p, int m, float c, float d) {
 // family of hash functions.
 // the index specifies which hash function should be used.
 // takes a string as the element to hash.
-int BloomFilter::hash(std::string element, int index) {
+int BloomFilter::hash(std::string element, int index) const {
     return 0; // STUB
 }
 
 // family of hash functions.
 // the index specifies which hash function should be used.
 // takes an unsigned int as the parameter to hash.
-int BloomFilter::hash(unsigned int element, int index) {
+int BloomFilter::hash(unsigned int element, int index) const {
     return 0; // STUB
 }
 
@@ -31,7 +31,7 @@ void BloomFilter::insert(std::string element) {
 
 // string to integer conversion.
 // necessary to run the hash functions on the element.
-unsigned int BloomFilter::strToInt(std::string element) {
+unsigned int BloomFilter::strToInt(std::string element) const {
     return 0; // STUB
 }
 
@@ -52,7 +52,7 @@ bool BloomFilter::find(std::string element) const {
 // p := probability of a false positive.
 // m := expected number of strings to be inserted.
 // c := scale factor of the bloom filter size.
-int BloomFilter::bloomFilterSize(double p, int m, float c) {
+int BloomFilter::bloomFilterSize(double p, int m, float c) const {
     return 0; // STUB
 }
 
@@ -62,7 +62,7 @@ int BloomFilter::bloomFilterSize(double p, int m, float c) {
 // n := bloom filter size (can find via bloomFilterSize(p, m, c))
 // m := expected number of strings to be inserted.
 // d := scale factor of number of hash functions.
-int BloomFilter::numHashFunctions(int n, int m, float d) {
+int BloomFilter::numHashFunctions(int n, int m, float d) const {
     return 0; // STUB
 }
 

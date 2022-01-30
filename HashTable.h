@@ -2,6 +2,7 @@
 #define HASH_TABLE_H
 
 #include <string>
+#include <vector>
 
 // separate chaining hash table.
 // used for deleted elements of BloomFilter.
@@ -30,14 +31,14 @@ class HashTable {
         bool find(std::string element) const;
 
     private:
-        int size; // size of HashTable, a prime number.
-        Node* [] hashTable; // a separate chaining hash table.
-
         // linked list implementation for separate hashing.
         struct Node {
             int data;
             Node* next;
-        }
-}
+        };
+
+        int size; // size of HashTable, a prime number.
+        Node* hashTable[]; // a separate chaining hash table.
+};
 
 #endif // HASH_TABLE_H
