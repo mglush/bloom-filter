@@ -1,0 +1,4 @@
+<insert the false-positive probability, p (float)>
+<insert the expected number of insertions into the bloom filter, m (int)>
+<insert the bloom filter size scalar, c (float, default 1.0)>
+<insert the number of hash function scalar, d (float, default 1.0)>
