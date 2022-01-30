@@ -10,8 +10,17 @@ class HashTable {
         // q := the size of the HashTable, a prime number.
         HashTable(int q);
 
+        // calculates the hash of an element.
+        // hash function used: x mod size of HashTable.
+        // used by the insert() function.
+        int hash(std::string element);
+
         // insert a string into the hash table.
         void insert(std::string element);
+
+        // string to integer conversion.
+        // necessary to run the hash functions on the element.
+        unsigned int strToInt(std::string element);
         
         // delete an element from the hash table.
         void remove(std::string element);
@@ -21,8 +30,14 @@ class HashTable {
         bool find(std::string element) const;
 
     private:
-        
-    
+        int size; // size of HashTable, a prime number.
+        Node* [] hashTable; // a separate chaining hash table.
+
+        // linked list implementation for separate hashing.
+        struct Node {
+            int data;
+            Node* next;
+        }
 }
 
 #endif // HASH_TABLE_H
