@@ -8,6 +8,7 @@
 HashTable::HashTable(int q) {
     this->size = q;
     this->hashTable = new Node*[q];
+    this->numEntries = 0;
     // set each element to point to null in the beginning
     for (int i = 0; i < q; i++) {
         hashTable[i] = NULL;

@@ -31,6 +31,9 @@ class HashTable {
         // returns 0 otherwise.
         bool find(std::string element) const;
 
+        // testing purposes (to test insert without using find())
+        int getNumEntries() const { return numEntries; }
+
     private:
         // linked list implementation for separate hashing.
         struct Node {
@@ -38,6 +41,7 @@ class HashTable {
             Node* next;
         };
         int size; // size of HashTable, a prime number.
+        int numEntries; // for testing purposes, to test insert without using find().
         Node** hashTable; // a separate chaining hash table.
 };
 

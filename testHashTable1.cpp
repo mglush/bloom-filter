@@ -12,7 +12,9 @@
 #include "HashTable.h"
 
 int main() {
+    std::cout << "Running testHashTable1 file!" << std::endl << std::endl;
     runAllTests();
+    std::cout << "Finished running testHashTable1 file!" << std::endl << std::endl;
 }
 
 void runAllTests() {
@@ -37,11 +39,11 @@ void test_hash() {
     START_TEST("test_hash");
 
     HashTable myTable(13);
-    assertEquals(0, myTable.hash(""), "hashing an empty string");
-    assertEquals(2, myTable.hash("ab"), "hashing 'ab'");
-    assertEquals(11, myTable.hash("ba"), "hashing 'ba'");
-    assertEquals(7, myTable.hash("aabb"), "hashing 'aabb'");
-    assertEquals(6, myTable.hash("bbaa"), "hashing 'bbaa'");
+    assertEquals(0 % 13, myTable.hash(""), "hashing an empty string");
+    assertEquals(3135 % 13, myTable.hash("ab"), "hashing 'ab'");
+    assertEquals(3105 % 13, myTable.hash("ba"), "hashing 'ba'");
+    assertEquals(3016800 % 13, myTable.hash("aabb"), "hashing 'aabb'");
+    assertEquals(2986080 % 13, myTable.hash("bbaa"), "hashing 'bbaa'");
 
     END_TEST("test_hash");
 }
