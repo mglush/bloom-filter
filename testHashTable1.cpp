@@ -5,7 +5,6 @@
 
 #include <cassert>
 #include <string>
-#include <sstream>
 #include <iostream>
 
 #include "testHashTable.h"
@@ -35,5 +34,14 @@ void test_strToInt() {
 }
 
 void test_hash() {
-    // STUB
+    START_TEST("test_hash");
+
+    HashTable myTable(13);
+    assertEquals(0, myTable.hash(""), "hashing an empty string");
+    assertEquals(2, myTable.hash("ab"), "hashing 'ab'");
+    assertEquals(11, myTable.hash("ba"), "hashing 'ba'");
+    assertEquals(7, myTable.hash("aabb"), "hashing 'aabb'");
+    assertEquals(6, myTable.hash("bbaa"), "hashing 'bbaa'");
+
+    END_TEST("test_hash");
 }

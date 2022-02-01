@@ -1,4 +1,4 @@
-// testframework.cpp
+// testFramework.cpp
 // the file contains a helpful general framework for running test files in the BloomFilter project.
 
 #include <sstream>

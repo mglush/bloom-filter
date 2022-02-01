@@ -1,3 +1,5 @@
+// HashTable.cpp
+
 #include "HashTable.h"
 #include <string>
 #include <iostream>
@@ -26,15 +28,14 @@ void HashTable::insert(std::string element) {
 
 // string to integer conversion.
 // necessary to run the hash functions on the element.
+// we evenly distribute the strings by multiplying each
+// ascii value by a power of a prime number.
+// 31 was chosen because it's a prime number close to
+// the number of letters in the alphabet.
 unsigned int HashTable::strToInt(std::string element) {
     unsigned int result = 0;
-    // we evenly distribute the strings by multiplying each
-    // ascii value by a power of a prime number.
-    for (unsigned int i = 0; i < element.length(); i++) {
-        // 31 was chosen because it's a prime number close to
-        // the number of letters in the alphabet.
+    for (unsigned int i = 0; i < element.length(); i++)
         result += element[i] * pow(31, i);
-    }
     return result;
 }
 
