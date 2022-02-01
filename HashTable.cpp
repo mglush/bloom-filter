@@ -24,7 +24,32 @@ int HashTable::hash(std::string element) {
 
 // insert a string into the hash table.
 void HashTable::insert(std::string element) {
-    // STUB
+    int location = this->hash(element);
+    // don't insert empty strings
+    if (element == "") { return; }
+    // first, check whether the element is in the table or not
+    if (!hashTable[location]) {
+        Node* newNode = new Node();
+        newNode->element = element;
+        newNode->next = NULL;
+        hashTable[location] = newNode;
+        this->numEntries++;
+    }
+    // otherwise we just go to the end of the linked list and add a node
+    else {
+        Node* temp = hashTable[location];
+        while (temp->next) { 
+            // check if this element is the one we want to insert.
+            // if yes, stop.
+            if (temp->element == element) { return; }
+            else { temp = temp->next; }
+        }
+        Node* newNode = new Node();
+        newNode->element = element;
+        newNode->next = NULL;
+        temp->next = newNode;
+        this->numEntries++;
+    }
 }
 
 // string to integer conversion.
