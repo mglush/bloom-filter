@@ -15,14 +15,14 @@ class HashTable {
         // calculates the hash of an element.
         // hash function used: x mod size of HashTable.
         // used by the insert() function.
-        int hash(std::string element);
+        int hash(std::string element) const;
 
         // insert a string into the hash table.
         void insert(std::string element);
 
         // string to integer conversion.
         // necessary to run the hash functions on the element.
-        unsigned int strToInt(std::string element);
+        unsigned int strToInt(std::string element) const;
         
         // delete an element from the hash table.
         void remove(std::string element);
