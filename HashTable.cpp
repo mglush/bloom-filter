@@ -19,7 +19,7 @@ HashTable::HashTable(int q) {
 // hash function used: x mod size of HashTable.
 // used by the insert() function.
 int HashTable::hash(std::string element) {
-    return 0; // STUB
+    return strToInt(element) % this->size;
 }
 
 // insert a string into the hash table.
