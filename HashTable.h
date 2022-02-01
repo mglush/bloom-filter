@@ -2,7 +2,6 @@
 #define HASH_TABLE_H
 
 #include <string>
-#include "Node.h"
 
 // separate chaining hash table.
 // used for deleted elements of BloomFilter.
@@ -32,6 +31,10 @@ class HashTable {
 
     private:
         // linked list implementation for separate hashing.
+        struct Node {
+            std::string element;
+            Node* next;
+        };
         int size; // size of HashTable, a prime number.
         Node** hashTable; // a separate chaining hash table.
 };
