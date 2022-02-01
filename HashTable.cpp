@@ -24,30 +24,30 @@ int HashTable::hash(std::string element) {
 
 // insert a string into the hash table.
 void HashTable::insert(std::string element) {
+    if (element == "") { return; } // don't insert empty strings.
     int location = this->hash(element);
-    if (element == "") { return; } // don't insert empty strings
-    // first, check whether the element is in the table or not
+    // first, check whether the element is in the table or not.
     if (!hashTable[location]) {
         Node* newNode = new Node();
         newNode->element = element;
         newNode->next = NULL;
         hashTable[location] = newNode;
-        this->numEntries++; // FOR TEST CASE PURPOSES
+        this->numEntries++; // FOR TEST CASE PURPOSES.
     }
-    // otherwise we just go to the end of the linked list and add a node
+    // otherwise we just go to the end of the linked list and add a node.
     else {
         Node* temp = hashTable[location];
-        if (temp->element == element) { return; } // duplicates don't get inserted
+        if (temp->element == element) { return; } // duplicates don't get inserted.
         while (temp->next) { 
-            if (temp->element == element) { return; } // duplicates don't get inserted
+            if (temp->element == element) { return; } // duplicates don't get inserted.
             else { temp = temp->next; }
         }
-        // create new node that will contain element
+        // create new node that will contain element.
         Node* newNode = new Node();
         newNode->element = element;
         newNode->next = NULL;
-        temp->next = newNode; // attach the newNode to the existing linked list
-        this->numEntries++; // FOR TEST CASE PURPOSES
+        temp->next = newNode; // attach the newNode to the existing linked list.
+        this->numEntries++; // FOR TEST CASE PURPOSES.
     }
 }
 
@@ -66,7 +66,32 @@ unsigned int HashTable::strToInt(std::string element) {
 
 // delete an element from the hash table.
 void HashTable::remove(std::string element) {
-    // STUB
+    if (element == "") { return; } // empty strings are never in the table.
+    int location = this->hash(element);
+    if (!this->hashTable[location]) { return; } // element is not in the table.
+    // otherwise, we find the element, and remove it.
+    Node* temp = hashTable[location];
+    // check if the first node at this location is the one we want to delete.
+    if (temp->element == element) {
+        hashTable[location] = temp->next;
+        delete temp;
+        this->numEntries--; // FOR TESTING PURPOSES ONLY.
+        return; // don't continue doing work after we're done.
+    }
+    // if not, look for the element in this linked list.
+    Node* temp1 = temp;
+    while (temp->next) {
+        temp1 = temp;
+        temp = temp->next;
+        if (temp->element == element) {
+            // check if there's more elements after temp.
+            if (temp->next) { temp1->next = temp->next; } 
+            else { temp1->next = NULL; }
+            delete temp;
+            this->numEntries--; // FOR TESTING PURPOSES ONLY.
+            return;
+        }
+    }
 }
 
 // returns 1 if the element is in the hash table.
