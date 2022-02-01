@@ -25,30 +25,29 @@ int HashTable::hash(std::string element) {
 // insert a string into the hash table.
 void HashTable::insert(std::string element) {
     int location = this->hash(element);
-    // don't insert empty strings
-    if (element == "") { return; }
+    if (element == "") { return; } // don't insert empty strings
     // first, check whether the element is in the table or not
     if (!hashTable[location]) {
         Node* newNode = new Node();
         newNode->element = element;
         newNode->next = NULL;
         hashTable[location] = newNode;
-        this->numEntries++;
+        this->numEntries++; // FOR TEST CASE PURPOSES
     }
     // otherwise we just go to the end of the linked list and add a node
     else {
         Node* temp = hashTable[location];
+        if (temp->element == element) { return; } // duplicates don't get inserted
         while (temp->next) { 
-            // check if this element is the one we want to insert.
-            // if yes, stop.
-            if (temp->element == element) { return; }
+            if (temp->element == element) { return; } // duplicates don't get inserted
             else { temp = temp->next; }
         }
+        // create new node that will contain element
         Node* newNode = new Node();
         newNode->element = element;
         newNode->next = NULL;
-        temp->next = newNode;
-        this->numEntries++;
+        temp->next = newNode; // attach the newNode to the existing linked list
+        this->numEntries++; // FOR TEST CASE PURPOSES
     }
 }
 

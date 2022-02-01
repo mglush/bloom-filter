@@ -69,11 +69,11 @@ void test_insert() {
     myTable.insert("ba");
     assertEquals(2, myTable.getNumEntries(), "inserted ba");
     
-    myTable.insert("aabb");
-    assertEquals(3, myTable.getNumEntries(), "inserted aabb");
+    myTable.insert("ab");
+    assertEquals(2, myTable.getNumEntries(), "inserted ab (DUPLICATE)");
     
-    myTable.insert("bbaa");
-    assertEquals(4, myTable.getNumEntries(), "inserted bbaa");
+    myTable.insert("ba");
+    assertEquals(2, myTable.getNumEntries(), "inserted ba (DUPLICATE)");
 
     END_TEST("test_insert");
 }
