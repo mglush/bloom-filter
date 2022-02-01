@@ -1,4 +1,4 @@
-// testframework.cpp
+// testFramework.cpp
 // the file contains a helpful general framework for running test files in the BloomFilter project.
 
 #include <sstream>
@@ -16,6 +16,16 @@ void assertEquals(std::string expected, std::string actual, std::string testDesc
     if (expected == actual) {
         std::cout << "PASSED " << std::endl;
     } else {
-        std::cout << "   FAILED: " << testDescription << std::endl << "   Expected: " << expected << " Actual: " << actual << std::endl;
+        std::cout << "   FAILED: " << testDescription << std::endl;
+        std::cout << "   Expected: " << expected << " Actual: " << actual << std::endl;
+    }
+}
+
+void assertEquals(int expected, int actual, std::string testDescription){
+    if (expected == actual) {
+        std::cout << "PASSED " << std::endl;
+    } else {
+        std::cout << "   FAILED: " << testDescription << std::endl;
+        std::cout << "   Expected: " << std::to_string(expected) << " Actual: " << std::to_string(actual) << std::endl;
     }
 }

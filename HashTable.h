@@ -1,8 +1,9 @@
+// HashTable.h
+
 #ifndef HASH_TABLE_H
 #define HASH_TABLE_H
 
 #include <string>
-#include <vector>
 
 // separate chaining hash table.
 // used for deleted elements of BloomFilter.
@@ -14,14 +15,14 @@ class HashTable {
         // calculates the hash of an element.
         // hash function used: x mod size of HashTable.
         // used by the insert() function.
-        int hash(std::string element);
+        int hash(std::string element) const;
 
         // insert a string into the hash table.
         void insert(std::string element);
 
         // string to integer conversion.
         // necessary to run the hash functions on the element.
-        unsigned int strToInt(std::string element);
+        unsigned int strToInt(std::string element) const;
         
         // delete an element from the hash table.
         void remove(std::string element);
@@ -30,15 +31,18 @@ class HashTable {
         // returns 0 otherwise.
         bool find(std::string element) const;
 
+        // testing purposes (to test insert without using find())
+        int getNumEntries() const { return numEntries; }
+
     private:
         // linked list implementation for separate hashing.
         struct Node {
-            int data;
+            std::string element;
             Node* next;
         };
-
         int size; // size of HashTable, a prime number.
-        Node* hashTable[]; // a separate chaining hash table.
+        int numEntries; // for testing purposes, to test insert without using find().
+        Node** hashTable; // a separate chaining hash table.
 };
 
 #endif // HASH_TABLE_H
