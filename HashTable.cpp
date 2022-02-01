@@ -1,9 +1,15 @@
 #include "HashTable.h"
 #include <string>
+#include <iostream>
 
 // q := the size of the HashTable, a prime number.
 HashTable::HashTable(int q) {
-    // STUB
+    this->size = q;
+    this->hashTable = new Node*[q];
+    // set each element to point to null in the beginning
+    for (int i = 0; i < q; i++) {
+        hashTable[i] = NULL;
+    }
 }
 
 // calculates the hash of an element.
