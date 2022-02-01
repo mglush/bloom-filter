@@ -27,7 +27,15 @@ void HashTable::insert(std::string element) {
 // string to integer conversion.
 // necessary to run the hash functions on the element.
 unsigned int HashTable::strToInt(std::string element) {
-    return 0; // STUB
+    unsigned int result = 0;
+    // we evenly distribute the strings by multiplying each
+    // ascii value by a power of a prime number.
+    for (unsigned int i = 0; i < element.length(); i++) {
+        // 31 was chosen because it's a prime number close to
+        // the number of letters in the alphabet.
+        result += element[i] * pow(31, i);
+    }
+    return result;
 }
 
 // delete an element from the hash table.

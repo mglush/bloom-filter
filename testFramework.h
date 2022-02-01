@@ -10,5 +10,6 @@
 void START_TEST(std::string testname);
 void END_TEST(std::string testname);
 void assertEquals(std::string expected, std::string actual, std::string testDescription);
+void assertEquals(int expected, int actual, std::string testDescription);
 
 #endif // TEST_FRAMEWORK_H
