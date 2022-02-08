@@ -6,40 +6,11 @@
 #include "math.h"
 #include "BloomFilter.h"
 #include "HashTable.h"
-
-void printTestValues(double p, float c, float d, int q) {
-    std::cout << "Experiment for values of:" << std::endl;
-    std::cout << "p = " << std::to_string(p) << std::endl;
-    std::cout << "c = " << std::to_string(c) << std::endl;
-    std::cout << "d = " << std::to_string(d) << std::endl;
-    std::cout << "q = " << std::to_string(q) << std::endl;
-}
-
-void printRoundResults(int falseNeg, int falsePos, std::vector<std::string> falsePosElements) {
-    std::cout << "Number of false negatives:" << std::endl;
-    std::cout << std::to_string(falseNeg) << std::endl;
-    std::cout << "Number of false positives:" << std::endl;
-    std::cout << std::to_string(falsePos) << std::endl;
-    std::cout << "Probability of false positives:" << std::endl;
-    std::cout << std::to_string(falsePos / 100.0) << std::endl;
-    std::cout << "False Positive Elements:" << std::endl;
-    for (unsigned int i = 0; i < falsePosElements.size(); i++)
-        std::cout << falsePosElements[i] << std::endl;
-}
-
-void printFinalStatistics(int falseNeg, int falsePos) {
-    std::cout << "Number of false negatives:" << std::endl;
-    std::cout << std::to_string(falseNeg) << std::endl;
-    std::cout << "Number of false positives:" << std::endl;
-    std::cout << std::to_string(falsePos) << std::endl;
-    std::cout << "Probability of false positives:" << std::endl;
-    std::cout << std::to_string(falsePos / 1000.0) << std::endl;
-}
+#include "createTestFileFramework.h"
 
 int main(int argc, char *argv[]) {
     double p;
-    int m, q;
-    int totalFalseNeg = 0, totalFalsePos = 0;
+    int m, q, totalFalseNeg = 0, totalFalsePos = 0;
     float c, d;
     std::ifstream inFile1, inFile2, inFile3, inFile4, inFile5;
     std::vector<std::string> falsePosElements;
@@ -54,17 +25,19 @@ int main(int argc, char *argv[]) {
 
     // create the BloomFilter and HashTable based on the inputs (so we can print test values).
     BloomFilter bloomFilter(p, m, c, d);
-    q = bloomFilter.getHashingPrimeNum(); // find the auxilary hashTable size
+    q = bloomFilter.getHashingPrimeNum(); // find the auxilary hashTable size.
     HashTable hashTable(q);
 
-    // print the values that are being experimented on
+    // print the values that are being experimented on.
     printTestValues(p, c, d, q);
 
-    // run 10 rounds of tests, each consisting of inserting 1000 elements
-    inFile2.open(argv[2]);
-    inFile3.open(argv[3]);
-    inFile4.open(argv[4]);
-    inFile5.open(argv[5]);
+    // open the other 4 input files.
+    inFile2.open(argv[2]); // inputs into the bloom filter.
+    inFile3.open(argv[3]); // successful searches list.
+    inFile4.open(argv[4]); // failed searches list.
+    inFile5.open(argv[5]); // deleteElements list.
+    
+    // run 10 rounds of tests, each consisting of inserting 1000 elements.
     for (int i = 0; i < 10; i++) {
         int falseNeg = 0;
         int falsePos = 0;
@@ -90,6 +63,9 @@ int main(int argc, char *argv[]) {
         for (int j = 0; j < 100; j++) {
             std::string curr;
             inFile4 >> curr;
+            // a false positive occurs iff we find the string in our bloom filter,
+            // AND it does not exist in our auxilary hash table
+            // (meaning we haven't removed it from bloom filter yet).
             if (bloomFilter.find(curr) && !hashTable.find(curr)) {
                 falsePos++;
                 falsePosElements.push_back(curr);
@@ -106,7 +82,7 @@ int main(int argc, char *argv[]) {
 
         // print results of this round.
         printRoundResults(falseNeg, falsePos, falsePosElements);
-        
+
         // record the false negatives and false positives data.
         totalFalseNeg += falseNeg;
         totalFalsePos += falsePos;
@@ -119,5 +95,11 @@ int main(int argc, char *argv[]) {
 
     // print the total statistics of our tests.
     printFinalStatistics(totalFalseNeg, totalFalsePos);
+
+    // finally, we create 10 test files for 10 different setups that we use.
+    for (int i = 1; i < 11; i++) {
+        std::string filename = "./setup_files/setup" + std::to_string(i) + ".txt";
+        makeTestFile(filename);
+    }
     return 0;
 }

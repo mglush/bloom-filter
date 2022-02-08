@@ -1,0 +1,6 @@
+Number of false negatives:
+0
+Number of false positives:
+106
+Probability of false positives:
+0.106000
