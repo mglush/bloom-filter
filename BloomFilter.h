@@ -59,6 +59,7 @@ class BloomFilter {
         bool find(std::string element) const;
 
         // used to test BloomFilter.
+        // this prints out the statistics about the bloomFilter.
         void print();
 
     private:

@@ -106,6 +106,7 @@ bool BloomFilter::find(std::string element) const {
 }
 
 // used to test BloomFilter.
+// this prints out the statistics about the bloomFilter.
 void BloomFilter::print() {
     // STUB
 }
