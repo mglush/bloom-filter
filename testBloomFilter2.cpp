@@ -19,15 +19,10 @@ int main() {
 
 void runAllTests() {
     test_insert();
-    test_remove();
     test_find();
 }
 
 void test_insert() {
-    // STUB
-}
-
-void test_remove() {
     // STUB
 }
 

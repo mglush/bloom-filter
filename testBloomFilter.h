@@ -11,7 +11,6 @@ void test_numHashFunctions();
 void test_generateHashParameter();
 //------------------------------
 void test_insert();
-void test_remove();
 void test_find();
 //------------------------------
 void test_print();

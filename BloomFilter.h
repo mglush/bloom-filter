@@ -24,10 +24,6 @@ class BloomFilter {
         // string to integer conversion.
         // necessary to run the hash functions on the element.
         unsigned int strToInt(std::string element) const;
-        
-        // delete a string from the BloomFilter.
-        // the function uses HashTable removedElements.
-        void remove(std::string element);
 
         // returns true if the element is in the BloomFilter.
         // returns false otherwise.
@@ -55,6 +51,11 @@ class BloomFilter {
         // m := expected number of strings to be inserted.
         // x := number of hash functions to be used.
         int generateHashParameter(int n, int m, int x);
+
+        // helper function for generateHashParameter.
+        // returns true if n is prime.
+        // returns false otherwise.
+        bool isPrime(int n) const;
 
         // used to test BloomFilter.
         void print();

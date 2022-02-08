@@ -32,12 +32,6 @@ unsigned int BloomFilter::strToInt(std::string element) const {
     return result;
 }
 
-// delete a string from the BloomFilter.
-// the function uses HashTable removedElements.
-void BloomFilter::remove(std::string element) {
-    // STUB
-}
-
 // returns true if the element is in the BloomFilter.
 // returns false otherwise.
 bool BloomFilter::find(std::string element) const {
@@ -70,8 +64,15 @@ int BloomFilter::numHashFunctions(int n, int m, float d) {
 // n := bloom filter size (can find via bloomFilterSize(p, m, c))
 // m := expected number of strings to be inserted.
 // x := number of hash functions to be used.
-int generateHashParameter(int n, int m, int x) {
-    return 0;
+int BloomFilter::generateHashParameter(int n, int m, int x) {
+    return 0; // STUB
+}
+
+// helper function for generateHashParameter.
+// returns true if n is prime.
+// returns false otherwise.
+bool BloomFilter::isPrime(int n) const {
+    return false; // STUB
 }
 
 // used to test BloomFilter.
