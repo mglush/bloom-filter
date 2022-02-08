@@ -58,9 +58,8 @@ class BloomFilter {
         // returns false otherwise.
         bool find(std::string element) const;
 
-        // used to test BloomFilter.
-        // this prints out the statistics about the bloomFilter.
-        void print();
+        // getting for hashingPrimeNum
+        int getHashingPrimeNum() const { return hashingPrimeNum; }
 
     private:
         std::vector<bool> bitArray; // the actual bloom filter array (std::vector<bool> functions like std::bitset)

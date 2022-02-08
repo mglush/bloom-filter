@@ -104,9 +104,3 @@ bool BloomFilter::find(std::string element) const {
         if (bitArray[hash(element, i)] == 0) { return false; }
     return true; // all hashes show a '1' bit for this element
 }
-
-// used to test BloomFilter.
-// this prints out the statistics about the bloomFilter.
-void BloomFilter::print() {
-    // STUB
-}
