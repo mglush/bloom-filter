@@ -82,19 +82,10 @@ void test_generateHashParameter() {
     
     BloomFilter bloomFilter(0.05, 0, 1.0, 1.0);
 
-    // testing size 0.
     assertEquals(2, bloomFilter.numHashFunctions(0, 0, 1.0), "testing bloom filter of size 0");
-    
-    // testing size 63.
     assertEquals(67, bloomFilter.numHashFunctions(63, 10, 1.0), "testing bloom filter of size 63");
-
-    // testing size 62353.
     assertEquals(62383, bloomFilter.numHashFunctions(62353, 10000, 1.0), "testing bloom filter of size 62353");
-    
-    // testing size 96.
     assertEquals(97, bloomFilter.numHashFunctions(96, 10, 1.0), "testing bloom filter of size 96");
-
-    // testing size 95851.
     assertEquals(95857, bloomFilter.numHashFunctions(95851, 10000, 1.0), "testing bloom filter of size 95851");
 
     END_TEST("test_generateHashParameter");

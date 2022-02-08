@@ -9,7 +9,6 @@ CXXFLAGS = -std=c++17 -Wall -Wextra -Wno-unused-parameter -Wno-unused-private-fi
 # CXXFLAGS = -std=c++17 -Wall -Wextra -Werror
 
 all: tests PA01
-	./PA01
 
 PA01: main.o BloomFilter.o HashTable.o
 	${CXX} $^ -o $@
