@@ -7,14 +7,15 @@
 // c := scale factor of the bloom filter size.
 // d := scale factor of number of hash functions.
 BloomFilter::BloomFilter(double p, int m, float c, float d) {
-    // find the correct size for out bloomFilter
+    // find the correct size for out bloomFilter.
     int n = bloomFilterSize(p, m, c);
-    // initialize our bitArray with the correct size
+    // initialize our bitArray with the correct size.
     for (int i = 0; i < n; i++)
         bitArray.push_back(0);
-    // initialize the vector holding the parameters/seeds of those hash functions
+    // initialize the vector holding the parameters/seeds of the
+    // necessary amount of hash functions.
     for (int i = 0; i < numHashFunctions(n, m, d); i++)
-        hashParameters.push_back(generateHashParameter(n, m));
+        hashParameters.push_back(generateHashParameter(n));
 }
 
 // calculates the size of the bloom filter,
@@ -38,22 +39,35 @@ int BloomFilter::numHashFunctions(int n, int m, float d) {
     return std::ceil((n / m) * std::log(2.0) / d);
 }
 
-// generates a prime number, that will act as a parameter for one of the
-// bloomFilter hash functions that will be used.
-// acts as a helper function for numHashFunctions; together, the two functions
-// initialize the hashParameters vector, and make the bloom filter ready for use.
-// n := bloom filter size (can find via bloomFilterSize(p, m, c))
+// returns the closest prime number to n such that
+// n is less than this prime number.
+int BloomFilter::nextPrime(int n) const {
+    while (!isPrime(n)) { n++; }
+    return n;
+}
+
+
+// generates a random seed number, that will act as a parameter
+// for one of the bloomFilter hash functions that will be used.
+// n := bloom filter size (can find via bloomFilterSize(p, m, c)).
 // m := expected number of strings to be inserted.
-// x := number of hash functions to be used.
-int BloomFilter::generateHashParameter(int n, int m) const {
-    return 0; // STUB
+int BloomFilter::generateHashParameter(int n) const {
+    return std::rand() % n;
 }
 
 // helper function for generateHashParameter.
 // returns true if n is prime.
 // returns false otherwise.
 bool BloomFilter::isPrime(int n) const {
-    return false; // STUB
+    // base cases
+    if (n <= 1) { return false; }
+    if (n <= 3) { return true; }
+    if (n % 2 == 0 || n % 3 == 0) { return false; }
+   
+    for (int i = 5; i * i <= n; i += 6)
+        if (n % i == 0 || n % (i + 2) == 0) { return false; }
+   
+    return true;
 }
 
 // family of hash functions.

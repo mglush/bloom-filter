@@ -8,7 +8,8 @@ void runAllTests();
 //------------------------------
 void test_bloomFilterSize();
 void test_numHashFunctions();
-void test_generateHashParameter();
+void test_nextPrime();
+void test_isPrime();
 //------------------------------
 void test_insert_and_find();
 
