@@ -17,7 +17,6 @@ class BloomFilter {
         // the index specifies which hash function should be used.
         // takes a string or an unsigned int as the element to hash.
         int hash(std::string element, int index) const;
-        int hash(unsigned int element, int index) const;
 
         // insert a string into the BloomFilter.
         void insert(std::string element);
@@ -43,10 +42,19 @@ class BloomFilter {
 
         // computes the number of hash functions to use based on the
         // BloomFilter size, and the expected num of strings to be inserted.
-        // n := bloom filter size (can find via bloomFilterSize(p, m, c))
+        // n := bloom filter size (can find via bloomFilterSize(p, m, c)).
         // m := expected number of strings to be inserted.
         // d := scale factor of number of hash functions.
-        int numHashFunctions(int n, int m, float d) const;
+        int numHashFunctions(int n, int m, float d);
+
+        // generates a prime number, that will act as a parameter for one of the
+        // bloomFilter hash functions that will be used.
+        // acts as a helper function for numHashFunctions; together, the two functions
+        // initialize the hashParameters vector, and make the bloom filter ready for use.
+        // n := bloom filter size (can find via bloomFilterSize(p, m, c))
+        // m := expected number of strings to be inserted.
+        // x := number of hash functions to be used.
+        int generateHashParameter(int n, int m, int x);
 
         // used to test BloomFilter.
         void print();
