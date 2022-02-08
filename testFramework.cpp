@@ -1,5 +1,6 @@
 // testFramework.cpp
 // the file contains a helpful general framework for running test files in the BloomFilter project.
+// courtesy of ucsb cs32 w21.
 
 #include <sstream>
 #include "testFramework.h"
@@ -21,6 +22,7 @@ void assertEquals(std::string expected, std::string actual, std::string testDesc
     }
 }
 
+// method overloading to compare ints instead of strings.
 void assertEquals(int expected, int actual, std::string testDescription){
     if (expected == actual) {
         std::cout << "PASSED " << std::endl;

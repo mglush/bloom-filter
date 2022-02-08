@@ -6,7 +6,6 @@
 
 void runAllTests();
 //------------------------------
-void test_strToInt();
 void test_bloomFilterSize();
 void test_numHashFunctions();
 void test_hashStrInput();

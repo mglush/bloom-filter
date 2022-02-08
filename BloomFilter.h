@@ -53,7 +53,12 @@ class BloomFilter {
 
     private:
         std::vector<bool> bitArray; // the actual bloom filter array (std::vector<bool> functions like std::bitset)
-        std::vector<int> hashParameters; // contains n parameters for the n hash functions we need
+        std::vector<int> hashParameters; // contains x prime parameters for the x hash functions we need.
+                                         // each hash parameter defines the hash function we use at that specific spot,
+                                         // with the general hash function form here being the following:
+                                         // { (element % currentParameter) % bloomFilterSize() }
+                                         // as a result, there will have a uniform distribution over
+                                         // the bloomFilter array for each of the hashFunctions used.
 };
 
 #endif // BLOOM_FILTER_H

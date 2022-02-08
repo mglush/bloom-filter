@@ -19,15 +19,10 @@ int main() {
 }
 
 void runAllTests() {
-    test_strToInt();
     test_bloomFilterSize();
     test_numHashFunctions();
     test_hashStrInput();
     test_hashNumInput();
-}
-
-void test_strToInt() {
-    // STUB
 }
 
 void test_bloomFilterSize() {
