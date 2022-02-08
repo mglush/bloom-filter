@@ -25,7 +25,8 @@ int main() {
 void runAllTests() {
     test_bloomFilterSize();
     test_numHashFunctions();
-    test_generateHashParameter();
+    test_nextPrime();
+    test_isPrime();
     test_insert_and_find();
 }
 
@@ -77,27 +78,32 @@ void test_numHashFunctions() {
     END_TEST("test_numHashFunctions");
 }
 
-void test_generateHashParameter() {
-    START_TEST("test_generateHashParameter");
+void test_nextPrime() {
+    START_TEST("test_nextPrime");
     
     BloomFilter bloomFilter(0.05, 0, 1.0, 1.0);
 
-    // testing size 0.
-    assertEquals(2, bloomFilter.numHashFunctions(0, 0, 1.0), "testing bloom filter of size 0");
+    assertEquals(2, bloomFilter.nextPrime(0), "testing bloom filter of size 0");
+    assertEquals(67, bloomFilter.nextPrime(63), "testing bloom filter of size 63");
+    assertEquals(62383, bloomFilter.nextPrime(62353), "testing bloom filter of size 62353");
+    assertEquals(97, bloomFilter.nextPrime(96), "testing bloom filter of size 96");
+    assertEquals(95857, bloomFilter.nextPrime(95851), "testing bloom filter of size 95851");
+
+    END_TEST("test_nextPrime");
+}
+
+void test_isPrime() {
+    START_TEST("test_isPrime");
     
-    // testing size 63.
-    assertEquals(67, bloomFilter.numHashFunctions(63, 10, 1.0), "testing bloom filter of size 63");
+    BloomFilter bloomFilter(0.05, 0, 1.0, 1.0);
 
-    // testing size 62353.
-    assertEquals(62383, bloomFilter.numHashFunctions(62353, 10000, 1.0), "testing bloom filter of size 62353");
-    
-    // testing size 96.
-    assertEquals(97, bloomFilter.numHashFunctions(96, 10, 1.0), "testing bloom filter of size 96");
+    assertEquals(true, bloomFilter.isPrime(67), "testing 67");
+    assertEquals(true, bloomFilter.isPrime(62383), "testing 62383");
+    assertEquals(false, bloomFilter.isPrime(62353), "testing 62353");
+    assertEquals(false, bloomFilter.isPrime(96), "testing 96");
+    assertEquals(true, bloomFilter.isPrime(95857), "testing 95857");
 
-    // testing size 95851.
-    assertEquals(95857, bloomFilter.numHashFunctions(95851, 10000, 1.0), "testing bloom filter of size 95851");
-
-    END_TEST("test_generateHashParameter");
+    END_TEST("test_isPrime");
 }
 
 void test_insert_and_find() {
