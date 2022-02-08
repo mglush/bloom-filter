@@ -1,16 +1,10 @@
-CXX = clang++
+CXX = g++
 
-# CXX = g++
+CXXFLAGS = -std=c++17 -Wall
 
-CXXFLAGS = -std=c++17 -Wall -Wextra -Wno-unused-parameter -Wno-unused-private-field
+all: tests PA1.out
 
-# Change to this before final submission:
-
-# CXXFLAGS = -std=c++17 -Wall -Wextra -Werror
-
-all: tests PA1
-
-PA1: main.o BloomFilter.o HashTable.o
+PA1.out: main.o BloomFilter.o HashTable.o
 	${CXX} $^ -o $@
 
 tests: testBloomFilter testHashTable
@@ -24,4 +18,4 @@ testHashTable: testHashTable.o HashTable.o testFramework.o
 	${CXX} ${CXXFLAGS} $^ -o $@
 
 clean:
-	/bin/rm -f testBloomFilter testHashTable PA1 *.o
+	/bin/rm -f testBloomFilter testHashTable PA1.out *.o

@@ -1,42 +1,10 @@
-#include <string>
-#include <fstream>
-#include <iostream>
-#include <utility>
-
-#include "math.h"
+#include "createTestFileFramework.h"
 #include "BloomFilter.h"
 #include "HashTable.h"
+#include <fstream>
+#include <string>
 
-void printTestValues(double p, float c, float d, int q) {
-    std::cout << "Experiment for values of:" << std::endl;
-    std::cout << "p = " << std::to_string(p) << std::endl;
-    std::cout << "c = " << std::to_string(c) << std::endl;
-    std::cout << "d = " << std::to_string(d) << std::endl;
-    std::cout << "q = " << std::to_string(q) << std::endl;
-}
-
-void printRoundResults(int falseNeg, int falsePos, std::vector<std::string> falsePosElements) {
-    std::cout << "Number of false negatives:" << std::endl;
-    std::cout << std::to_string(falseNeg) << std::endl;
-    std::cout << "Number of false positives:" << std::endl;
-    std::cout << std::to_string(falsePos) << std::endl;
-    std::cout << "Probability of false positives:" << std::endl;
-    std::cout << std::to_string(falsePos / 100.0) << std::endl;
-    std::cout << "False Positive Elements:" << std::endl;
-    for (unsigned int i = 0; i < falsePosElements.size(); i++)
-        std::cout << falsePosElements[i] << std::endl;
-}
-
-void printFinalStatistics(int falseNeg, int falsePos) {
-    std::cout << "Number of false negatives:" << std::endl;
-    std::cout << std::to_string(falseNeg) << std::endl;
-    std::cout << "Number of false positives:" << std::endl;
-    std::cout << std::to_string(falsePos) << std::endl;
-    std::cout << "Probability of false positives:" << std::endl;
-    std::cout << std::to_string(falsePos / 1000.0) << std::endl;
-}
-
-int main(int argc, char *argv[]) {
+int makeTestFile(std::string filename) {
     double p;
     int m, q;
     int totalFalseNeg = 0, totalFalsePos = 0;
@@ -45,7 +13,7 @@ int main(int argc, char *argv[]) {
     std::vector<std::string> falsePosElements;
 
     // process the inputs from file 1.
-    inFile1.open(argv[1]);
+    inFile1.open(filename);
     inFile1 >> p;
     inFile1 >> m;
     inFile1 >> c;
@@ -61,10 +29,10 @@ int main(int argc, char *argv[]) {
     printTestValues(p, c, d, q);
 
     // run 10 rounds of tests, each consisting of inserting 1000 elements
-    inFile2.open(argv[2]);
-    inFile3.open(argv[3]);
-    inFile4.open(argv[4]);
-    inFile5.open(argv[5]);
+    inFile2.open("input.txt");
+    inFile3.open("successfulSearch.txt");
+    inFile4.open("failedSearch.txt");
+    inFile5.open("remove.txt");
     for (int i = 0; i < 10; i++) {
         int falseNeg = 0;
         int falsePos = 0;

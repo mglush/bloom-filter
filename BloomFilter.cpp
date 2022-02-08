@@ -83,7 +83,7 @@ int BloomFilter::hash(std::string element, int index) const {
 
 // insert a string into the BloomFilter.
 void BloomFilter::insert(std::string element) {
-    for (int i = 0; i < hashParameters.size(); i++)
+    for (unsigned int i = 0; i < hashParameters.size(); i++)
         bitArray[hash(element, i)] = 1;
 }
 
@@ -100,7 +100,7 @@ unsigned int BloomFilter::strToInt(std::string element) const {
 // returns true if the element is in the BloomFilter.
 // returns false otherwise.
 bool BloomFilter::find(std::string element) const {
-    for (int i = 0; i < hashParameters.size(); i++)
+    for (unsigned int i = 0; i < hashParameters.size(); i++)
         if (bitArray[hash(element, i)] == 0) { return false; }
     return true; // all hashes show a '1' bit for this element
 }
