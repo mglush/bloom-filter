@@ -10,9 +10,6 @@ void test_bloomFilterSize();
 void test_numHashFunctions();
 void test_generateHashParameter();
 //------------------------------
-void test_insert();
-void test_find();
-//------------------------------
-void test_print();
+void test_insert_and_find();
 
 #endif // TEST_BLOOMFILTER_H

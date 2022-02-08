@@ -15,15 +15,16 @@
 #include "HashTable.h"
 
 int main() {
-    std::cout << "Running testBloomFilter1 file!" << std::endl << std::endl;
+    std::cout << "Running testBloomFilter file!" << std::endl << std::endl;
     runAllTests();
-    std::cout << "Finished running testBloomFilter1 file!" << std::endl << std::endl;
+    std::cout << "Finished running testBloomFilter file!" << std::endl << std::endl;
 }
 
 void runAllTests() {
     test_bloomFilterSize();
     test_numHashFunctions();
     test_generateHashParameter();
+    test_insert_and_find();
 }
 
 void test_bloomFilterSize() {
@@ -95,4 +96,24 @@ void test_generateHashParameter() {
     assertEquals(95857, bloomFilter.numHashFunctions(95851, 10000, 1.0), "testing bloom filter of size 95851");
 
     END_TEST("test_generateHashParameter");
+}
+
+void test_insert_and_find() {
+    START_TEST("test_insert_and_find");
+
+    BloomFilter bloomFilter(0.05, 10, 1.0, 1.0);
+
+    assertEquals(false, bloomFilter.find("baa"), "looking for invalid string baa in an empty bloom filter");
+    assertEquals(false, bloomFilter.find("aba"), "looking for invalid string aba in an empty bloom filter");
+    
+    bloomFilter.insert(""); // inserting empty string (should not be inserted)
+    bloomFilter.insert("ab"); // inserting ab
+    assertEquals(true, bloomFilter.find("ab"), "looking for (valid) ab");
+    bloomFilter.insert("ba"); // inserting ba
+    assertEquals(true, bloomFilter.find("ba"), "looking for (valid) ba");
+
+    assertEquals(false, bloomFilter.find("baa"), "looking for invalid string baa in a filled bloom filter");
+    assertEquals(false, bloomFilter.find("aba"), "looking for invalid string aba in a filled bloom filter");
+
+    END_TEST("test_insert_and_find");
 }
