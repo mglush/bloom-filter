@@ -1,9 +1,11 @@
-// testBloomFilter1.cpp
+// testBloomFilter.cpp
 // this test file tests the following BloomFilter functions:
-// strToInt()
 // bloomFilterSize()
 // numHashFunctions()
-// hash()
+// test_generateHashParameter()
+// test_insert_and_find() // tested together because it's difficult
+// (or impossible) to test insert without find, or find without insert.
+
 
 #include <cassert>
 #include <string>
