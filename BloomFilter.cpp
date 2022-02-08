@@ -8,14 +8,16 @@
 // d := scale factor of number of hash functions.
 BloomFilter::BloomFilter(double p, int m, float c, float d) {
     // find the correct size for out bloomFilter.
-    int n = bloomFilterSize(p, m, c);
+    this->size = bloomFilterSize(p, m, c);
+    // find the prime number closest to the bloomFilter size, set the private var.
+    this->hashingPrimeNum = nextPrime(this->size);
     // initialize our bitArray with the correct size.
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < this->size; i++)
         bitArray.push_back(0);
     // initialize the vector holding the parameters/seeds of the
     // necessary amount of hash functions.
-    for (int i = 0; i < numHashFunctions(n, m, d); i++)
-        hashParameters.push_back(generateHashParameter(n));
+    for (int i = 0; i < numHashFunctions(this->size, m, d); i++)
+        hashParameters.push_back(generateHashParameter(this->size));
 }
 
 // calculates the size of the bloom filter,
@@ -73,13 +75,16 @@ bool BloomFilter::isPrime(int n) const {
 // family of hash functions.
 // the index specifies which hash function should be used.
 // takes a string as the element to hash.
+// return a valid index for bitArray.
 int BloomFilter::hash(std::string element, int index) const {
-    return 0; // STUB
+    unsigned int elementRep = strToInt(element);
+    return ((elementRep ^ hashParameters[index]) % this->hashingPrimeNum) % this->size;
 }
 
 // insert a string into the BloomFilter.
 void BloomFilter::insert(std::string element) {
-    // STUB
+    for (int i = 0; i < hashParameters.size(); i++)
+        bitArray[hash(element, i)] = 1;
 }
 
 // string to integer conversion.
@@ -95,7 +100,9 @@ unsigned int BloomFilter::strToInt(std::string element) const {
 // returns true if the element is in the BloomFilter.
 // returns false otherwise.
 bool BloomFilter::find(std::string element) const {
-    return false; // STUB
+    for (int i = 0; i < hashParameters.size(); i++)
+        if (bitArray[hash(element, i)] == 0) { return false; }
+    return true; // all hashes show a '1' bit for this element
 }
 
 // used to test BloomFilter.

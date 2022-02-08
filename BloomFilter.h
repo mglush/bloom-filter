@@ -69,6 +69,8 @@ class BloomFilter {
                                          // { (element % currentParameter) % bloomFilterSize() }
                                          // as a result, there will have a uniform distribution over
                                          // the bloomFilter array for each of the hashFunctions used.
+        int hashingPrimeNum;
+        int size;
 };
 
 #endif // BLOOM_FILTER_H
