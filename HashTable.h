@@ -51,8 +51,6 @@ class HashTable {
         struct Node {
             std::string element;
             Node* next;
-
-            ~Node();
         };
         int size; // size of HashTable, a prime number.
         int numEntries; // for testing purposes, and for calculating the load factor.

@@ -11,9 +11,7 @@ HashTable::HashTable(int q) {
     this->hashTable = new Node*[q];
     this->numEntries = 0;
     // set each element to point to null in the beginning
-    for (int i = 0; i < q; i++) {
-        hashTable[i] = NULL;
-    }
+    for (int i = 0; i < q; i++) { hashTable[i] = NULL; }
 }
 
 // calculates the hash of an element.
@@ -53,7 +51,7 @@ void HashTable::insert(std::string element) {
 
     // after we have inserted a new node, we need to check our load factor!
     // if the load factor is now greater than 0.7, we resize our table.
-    if (numEntries * 1.0 / size >= 0.7) {
+    if ((numEntries * 1.0 / size) >= 0.7) {
         resizeTable(); // involves clearing the old array, and creating a new one.
     }
 }
@@ -63,28 +61,28 @@ void HashTable::resizeTable() {
     // double the size, and find the next closest prime to that number.
     int oldSize = this->size;
     this->size = this->nextPrime(this->size * 2);
-    // make new array, rehash all elements with the new size of the table.
+    // make new array, fill it with null pointers.
     Node** newTable = new Node*[this->size];
+    for (int i = 0; i < this->size; i++) { newTable[i] = NULL; }
+    // rehash all elements with the new size of the table.
     for (int i = 0; i < oldSize; i++) {
-        Node* iterator = hashTable[i];
-        while (iterator) {
+        for (Node* iterator = this->hashTable[i]; iterator != NULL;) {
             Node* temp = new Node();
             temp->element = iterator->element;
             temp->next = NULL;
-            int location = this->hash(iterator->element);
-            if (!newTable[location]) { hashTable[location] = temp; }
+            int location = this->hash(temp->element);
+            if (!newTable[location]) { newTable[location] = temp; }
             else {
                 Node* last = newTable[location];
                 while (last->next) { last = last->next; }
                 last->next = temp;
             }
-            // increment iterator in the end.
+            // and then delete the element that was just rehashed.
+            Node* wantToDel = iterator;
             iterator = iterator->next;
+            delete wantToDel;
         }
     }
-    // delete the old array, and all the elements within.
-    for (int i = 0; i < oldSize; i++)
-        delete this->hashTable[i];
     // set the hashtable to point the newly create array
     this->hashTable = newTable;
 }
@@ -172,8 +170,4 @@ bool HashTable::find(std::string element) const {
         }
     }
     return 0; // couldn't find the element.
-}
-
-HashTable::Node::~Node(){
-    delete next;
 }
