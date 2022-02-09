@@ -1,4 +1,5 @@
 #include "createTestFileFramework.h"
+#include <cmath>
 
 void printTestValues(double p, float c, float d, int q) {
     std::cout << "Experiment for values of:" << std::endl;
@@ -52,7 +53,7 @@ void makeTestFile(std::string setup) {
 
     // create the BloomFilter and HashTable based on the inputs (so we can print test values).
     BloomFilter bloomFilter(p, m, c, d);
-    HashTable hashTable(bloomFilter.getHashingPrimeNum());
+    HashTable hashTable(bloomFilter.nextPrime(std::ceil(std::sqrt(bloomFilter.getHashingPrimeNum()))));
 
     // run 10 rounds of tests, each consisting of inserting 1000 elements.
     // this time, we only record the final statistics about false positives/negatives.

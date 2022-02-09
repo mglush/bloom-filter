@@ -3,6 +3,7 @@
 #include "HashTable.h"
 #include <string>
 #include <iostream>
+#include <cmath>
 
 // q := the size of the HashTable, a prime number.
 HashTable::HashTable(int q) {
@@ -49,6 +50,65 @@ void HashTable::insert(std::string element) {
         temp->next = newNode; // attach the newNode to the existing linked list.
         this->numEntries++; // FOR TEST CASE PURPOSES.
     }
+
+    // after we have inserted a new node, we need to check our load factor!
+    // if the load factor is now greater than 0.7, we resize our table.
+    if (numEntries * 1.0 / size >= 0.7) {
+        resizeTable(); // involves clearing the old array, and creating a new one.
+    }
+}
+
+// resizes the table to about double the size (whenever load factor >= 0.7).
+void HashTable::resizeTable() {
+    // double the size, and find the next closest prime to that number.
+    int oldSize = this->size;
+    this->size = this->nextPrime(this->size * 2);
+    // make new array, rehash all elements with the new size of the table.
+    Node** newTable = new Node*[this->size];
+    for (int i = 0; i < oldSize; i++) {
+        Node* iterator = hashTable[i];
+        while (iterator) {
+            Node* temp = new Node();
+            temp->element = iterator->element;
+            temp->next = NULL;
+            int location = this->hash(iterator->element);
+            if (!newTable[location]) { hashTable[location] = temp; }
+            else {
+                Node* last = newTable[location];
+                while (last->next) { last = last->next; }
+                last->next = temp;
+            }
+            // increment iterator in the end.
+            iterator = iterator->next;
+        }
+    }
+    // delete the old array, and all the elements within.
+    for (int i = 0; i < oldSize; i++)
+        delete this->hashTable[i];
+    // set the hashtable to point the newly create array
+    this->hashTable = newTable;
+}
+
+// returns the closest prime number to n such that
+// n is less than this prime number.
+int HashTable::nextPrime(int n) const {
+    while (!isPrime(n)) { n++; }
+    return n;
+}
+
+// helper function for generateHashParameter.
+// returns true if n is prime.
+// returns false otherwise.
+bool HashTable::isPrime(int n) const {
+    // base cases
+    if (n <= 1) { return false; }
+    if (n <= 3) { return true; }
+    if (n % 2 == 0 || n % 3 == 0) { return false; }
+   
+    for (int i = 5; i * i <= n; i += 6)
+        if (n % i == 0 || n % (i + 2) == 0) { return false; }
+   
+    return true;
 }
 
 // string to integer conversion.
@@ -112,4 +172,8 @@ bool HashTable::find(std::string element) const {
         }
     }
     return 0; // couldn't find the element.
+}
+
+HashTable::Node::~Node(){
+    delete next;
 }
