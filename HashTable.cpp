@@ -1,6 +1,7 @@
 // HashTable.cpp
 
 #include "HashTable.h"
+#include "utilities.h"
 #include <string>
 #include <iostream>
 #include <cmath>
@@ -60,7 +61,7 @@ void HashTable::insert(std::string element) {
 void HashTable::resizeTable() {
     // double the size, and find the next closest prime to that number.
     int oldSize = this->size;
-    this->size = this->nextPrime(this->size * 2);
+    this->size = nextPrime(this->size * 2);
     // make new array, fill it with null pointers.
     Node** newTable = new Node*[this->size];
     for (int i = 0; i < this->size; i++) { newTable[i] = NULL; }
@@ -85,41 +86,6 @@ void HashTable::resizeTable() {
     }
     // set the hashtable to point the newly create array
     this->hashTable = newTable;
-}
-
-// returns the closest prime number to n such that
-// n is less than this prime number.
-int HashTable::nextPrime(int n) const {
-    while (!isPrime(n)) { n++; }
-    return n;
-}
-
-// helper function for generateHashParameter.
-// returns true if n is prime.
-// returns false otherwise.
-bool HashTable::isPrime(int n) const {
-    // base cases
-    if (n <= 1) { return false; }
-    if (n <= 3) { return true; }
-    if (n % 2 == 0 || n % 3 == 0) { return false; }
-   
-    for (int i = 5; i * i <= n; i += 6)
-        if (n % i == 0 || n % (i + 2) == 0) { return false; }
-   
-    return true;
-}
-
-// string to integer conversion.
-// necessary to run the hash functions on the element.
-// we evenly distribute the strings by multiplying each
-// ascii value by a power of a prime number.
-// 31 was chosen because it's a prime number close to
-// the number of letters in the alphabet.
-unsigned int HashTable::strToInt(std::string element) const {
-    unsigned int result = 0;
-    for (unsigned int i = 0; i < element.length(); i++)
-        result += element[i] * pow(31, i);
-    return result;
 }
 
 // delete an element from the hash table.

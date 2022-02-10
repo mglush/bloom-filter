@@ -1,4 +1,5 @@
 #include "createTestFileFramework.h"
+#include "utilities.h"
 #include <cmath>
 
 void printTestValues(double p, float c, float d, int q) {
@@ -53,7 +54,7 @@ void makeTestFile(std::string setup) {
 
     // create the BloomFilter and HashTable based on the inputs (so we can print test values).
     BloomFilter bloomFilter(p, m, c, d);
-    HashTable hashTable(bloomFilter.nextPrime(std::ceil(std::sqrt(bloomFilter.getHashingPrimeNum()))));
+    HashTable hashTable(nextPrime(std::ceil(std::sqrt(bloomFilter.getHashingPrimeNum()))));
 
     // run 10 rounds of tests, each consisting of inserting 1000 elements.
     // this time, we only record the final statistics about false positives/negatives.
@@ -96,8 +97,7 @@ void makeTestFile(std::string setup) {
 
     // record the total statistics in the output<test#>.txt file.
     outFile.open(outputFileName);
-    outFile << "Number of false negatives:\n" << std::to_string(totalFalseNeg) << "\n";
-    outFile << "Number of false positives:\n" << std::to_string(totalFalsePos) << "\n";
-    outFile << "Probability of false positives:\n" << std::to_string(totalFalsePos / 1000.0);
+    outFile << "Testing values:\nc = " << std::to_string(c) << "\nd = " << std::to_string(d) << "\n";
+    outFile << "Probability of false positive:\n" << std::to_string(totalFalsePos / 1000.0);
     outFile.close();
 }

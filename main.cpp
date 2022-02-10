@@ -7,6 +7,7 @@
 #include "math.h"
 #include "BloomFilter.h"
 #include "HashTable.h"
+#include "utilities.h"
 #include "createTestFileFramework.h"
 
 int main(int argc, char *argv[]) {
@@ -26,7 +27,7 @@ int main(int argc, char *argv[]) {
 
     // create the BloomFilter and HashTable based on the inputs (so we can print test values).
     BloomFilter bloomFilter(p, m, c, d);
-    q = bloomFilter.nextPrime(std::ceil(std::sqrt(bloomFilter.getHashingPrimeNum()))); // find the auxilary hashTable size.
+    q = nextPrime(std::ceil(std::sqrt(bloomFilter.getHashingPrimeNum()))); // find the auxilary hashTable size.
     HashTable hashTable(q);
 
     // print the values that are being experimented on.
@@ -40,29 +41,26 @@ int main(int argc, char *argv[]) {
     
     // run 10 rounds of tests, each consisting of inserting 1000 elements.
     for (int i = 0; i < 10; i++) {
-        int falseNeg = 0;
-        int falsePos = 0;
+        int falseNeg = 0, falsePos = 0;
+        std::string curr;
         falsePosElements.clear();
 
         std::cout << "Phase " << std::to_string(i + 1) << ":" << std::endl;
 
         // read in, and insert, the next 1000 elements into the bloom filter.
         for (int j = 0; j < 1000; j++) {
-            std::string curr;
             inFile2 >> curr;
             bloomFilter.insert(curr);
         }
 
         // read in, and look for, the next 100 elements in successfulSearches text file.
         for (int j = 0; j < 100; j++) {
-            std::string curr;
             inFile3 >> curr;
             if (!bloomFilter.find(curr)) { falseNeg++; }
         }
 
         // read in, and look for, the next 100 elements in failedSearches text file.
         for (int j = 0; j < 100; j++) {
-            std::string curr;
             inFile4 >> curr;
             // a false positive occurs iff we find the string in our bloom filter,
             // AND it does not exist in our auxilary hash table
@@ -75,7 +73,6 @@ int main(int argc, char *argv[]) {
 
         // read in, and remove, the next 100 elements in removedElements text file.
         for (int j = 0; j < 100; j++) {
-            std::string curr;
             inFile5 >> curr;
             // if element exists in the bloom filter, we remove it by adding it to hashTable.
             if (bloomFilter.find(curr)) { hashTable.insert(curr); }
@@ -98,7 +95,7 @@ int main(int argc, char *argv[]) {
     printFinalStatistics(totalFalseNeg, totalFalsePos);
 
     // finally, we create 10 test files for 10 different setups that we use.
-    for (int i = 1; i < 11; i++) {
+    for (int i = 1; i < 14; i++) {
         std::string filename = "./setup_files/setup" + std::to_string(i) + ".txt";
         makeTestFile(filename);
     }
