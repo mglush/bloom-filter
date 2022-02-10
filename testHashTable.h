@@ -6,11 +6,12 @@
 
 void runAllTests();
 //------------------------------
-void test_strToInt();
 void test_hash();
 //------------------------------
 void test_insert();
 void test_remove();
 void test_find();
+//------------------------------
+void utilities_test_strToInt();
 
 #endif // TEST_HASHTABLE_H

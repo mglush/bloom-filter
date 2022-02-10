@@ -4,17 +4,17 @@ CXXFLAGS = -std=c++17 -Wall
 
 all: tests PA1.out
 
-PA1.out: main.o createTestFileFramework.o BloomFilter.o HashTable.o
+PA1.out: main.o createTestFileFramework.o BloomFilter.o HashTable.o utilities.o
 	${CXX} $^ -o $@
 
 tests: testBloomFilter testHashTable
 	./testBloomFilter
 	./testHashTable
 
-testBloomFilter: testBloomFilter.o BloomFilter.o HashTable.o testFramework.o
+testBloomFilter: testBloomFilter.o BloomFilter.o HashTable.o testFramework.o utilities.o
 	${CXX} ${CXXFLAGS} $^ -o $@
 
-testHashTable: testHashTable.o HashTable.o testFramework.o
+testHashTable: testHashTable.o HashTable.o testFramework.o utilities.o
 	${CXX} ${CXXFLAGS} $^ -o $@
 
 cleanOutputs:

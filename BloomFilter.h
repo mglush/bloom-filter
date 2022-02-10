@@ -27,20 +27,10 @@ class BloomFilter {
         // d := scale factor of number of hash functions.
         int numHashFunctions(int n, int m, float d);
 
-        // returns the closest prime number to n such that
-        // n is less than this prime number.
-        int nextPrime(int n) const;
-
         // generates a random seed number, that will act as a parameter
         // for one of the bloomFilter hash functions that will be used.
         // n := bloom filter size (can find via bloomFilterSize(p, m, c)).
-        // m := expected number of strings to be inserted.
         int generateHashParameter(int n) const;
-
-        // helper function for generateHashParameter.
-        // returns true if n is prime.
-        // returns false otherwise.
-        bool isPrime(int n) const;
 
         // family of hash functions.
         // the index specifies which hash function should be used.
@@ -49,10 +39,6 @@ class BloomFilter {
 
         // insert a string into the BloomFilter.
         void insert(std::string element);
-
-        // string to integer conversion.
-        // necessary to run the hash functions on the element.
-        unsigned int strToInt(std::string element) const;
 
         // returns true if the element is in the BloomFilter.
         // returns false otherwise.

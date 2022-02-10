@@ -7,6 +7,7 @@
 #include "math.h"
 #include "BloomFilter.h"
 #include "HashTable.h"
+#include "utilities.h"
 #include "createTestFileFramework.h"
 
 int main(int argc, char *argv[]) {
@@ -26,7 +27,7 @@ int main(int argc, char *argv[]) {
 
     // create the BloomFilter and HashTable based on the inputs (so we can print test values).
     BloomFilter bloomFilter(p, m, c, d);
-    q = bloomFilter.nextPrime(std::ceil(std::sqrt(bloomFilter.getHashingPrimeNum()))); // find the auxilary hashTable size.
+    q = nextPrime(std::ceil(std::sqrt(bloomFilter.getHashingPrimeNum()))); // find the auxilary hashTable size.
     HashTable hashTable(q);
 
     // print the values that are being experimented on.

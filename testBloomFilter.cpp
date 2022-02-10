@@ -2,7 +2,10 @@
 // this test file tests the following BloomFilter functions:
 // bloomFilterSize()
 // numHashFunctions()
-// test_generateHashParameter()
+// utility functions:
+// nextPrime()
+// isPrime()
+// and finally:
 // test_insert_and_find() // tested together because it's difficult
 // (or impossible) to test insert without find, or find without insert.
 
@@ -15,6 +18,7 @@
 #include "testFramework.h"
 #include "BloomFilter.h"
 #include "HashTable.h"
+#include "utilities.h"
 
 int main() {
     std::cout << "Running testBloomFilter file!" << std::endl << std::endl;
@@ -25,9 +29,11 @@ int main() {
 void runAllTests() {
     test_bloomFilterSize();
     test_numHashFunctions();
-    test_nextPrime();
-    test_isPrime();
+    //----------------------
     test_insert_and_find();
+    //----------------------
+    utilities_test_nextPrime();
+    utilities_test_isPrime();
 }
 
 void test_bloomFilterSize() {
@@ -78,34 +84,6 @@ void test_numHashFunctions() {
     END_TEST("test_numHashFunctions");
 }
 
-void test_nextPrime() {
-    START_TEST("test_nextPrime");
-    
-    BloomFilter bloomFilter(0.05, 0, 1.0, 1.0);
-
-    assertEquals(2, bloomFilter.nextPrime(0), "testing bloom filter of size 0");
-    assertEquals(67, bloomFilter.nextPrime(63), "testing bloom filter of size 63");
-    assertEquals(62383, bloomFilter.nextPrime(62353), "testing bloom filter of size 62353");
-    assertEquals(97, bloomFilter.nextPrime(96), "testing bloom filter of size 96");
-    assertEquals(95857, bloomFilter.nextPrime(95851), "testing bloom filter of size 95851");
-
-    END_TEST("test_nextPrime");
-}
-
-void test_isPrime() {
-    START_TEST("test_isPrime");
-    
-    BloomFilter bloomFilter(0.05, 0, 1.0, 1.0);
-
-    assertEquals(true, bloomFilter.isPrime(67), "testing 67");
-    assertEquals(true, bloomFilter.isPrime(62383), "testing 62383");
-    assertEquals(false, bloomFilter.isPrime(62353), "testing 62353");
-    assertEquals(false, bloomFilter.isPrime(96), "testing 96");
-    assertEquals(true, bloomFilter.isPrime(95857), "testing 95857");
-
-    END_TEST("test_isPrime");
-}
-
 void test_insert_and_find() {
     START_TEST("test_insert_and_find");
 
@@ -124,4 +102,28 @@ void test_insert_and_find() {
     assertEquals(false, bloomFilter.find("aba"), "looking for invalid string aba in a filled bloom filter");
 
     END_TEST("test_insert_and_find");
+}
+
+void utilities_test_nextPrime() {
+    START_TEST("utilities_test_nextPrime");
+    
+    assertEquals(2, nextPrime(0), "testing bloom filter of size 0");
+    assertEquals(67, nextPrime(63), "testing bloom filter of size 63");
+    assertEquals(62383, nextPrime(62353), "testing bloom filter of size 62353");
+    assertEquals(97, nextPrime(96), "testing bloom filter of size 96");
+    assertEquals(95857, nextPrime(95851), "testing bloom filter of size 95851");
+
+    END_TEST("utilities_test_nextPrime");
+}
+
+void utilities_test_isPrime() {
+    START_TEST("utilities_test_isPrime");
+    
+    assertEquals(true, isPrime(67), "testing 67");
+    assertEquals(true, isPrime(62383), "testing 62383");
+    assertEquals(false, isPrime(62353), "testing 62353");
+    assertEquals(false, isPrime(96), "testing 96");
+    assertEquals(true, isPrime(95857), "testing 95857");
+
+    END_TEST("utilities_test_isPrime");
 }

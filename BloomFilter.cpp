@@ -1,4 +1,5 @@
 #include "BloomFilter.h"
+#include "utilities.h"
 #include <string>
 #include <cmath>
 
@@ -41,35 +42,12 @@ int BloomFilter::numHashFunctions(int n, int m, float d) {
     return std::ceil((n / m) * std::log(2.0) / d);
 }
 
-// returns the closest prime number to n such that
-// n is less than this prime number.
-int BloomFilter::nextPrime(int n) const {
-    while (!isPrime(n)) { n++; }
-    return n;
-}
-
 
 // generates a random seed number, that will act as a parameter
 // for one of the bloomFilter hash functions that will be used.
 // n := bloom filter size (can find via bloomFilterSize(p, m, c)).
-// m := expected number of strings to be inserted.
 int BloomFilter::generateHashParameter(int n) const {
     return std::rand() % n;
-}
-
-// helper function for generateHashParameter.
-// returns true if n is prime.
-// returns false otherwise.
-bool BloomFilter::isPrime(int n) const {
-    // base cases
-    if (n <= 1) { return false; }
-    if (n <= 3) { return true; }
-    if (n % 2 == 0 || n % 3 == 0) { return false; }
-   
-    for (int i = 5; i * i <= n; i += 6)
-        if (n % i == 0 || n % (i + 2) == 0) { return false; }
-   
-    return true;
 }
 
 // family of hash functions.
@@ -85,16 +63,6 @@ int BloomFilter::hash(std::string element, int index) const {
 void BloomFilter::insert(std::string element) {
     for (unsigned int i = 0; i < hashParameters.size(); i++)
         bitArray[hash(element, i)] = 1;
-}
-
-// string to integer conversion.
-// necessary to run the hash functions on the element.
-// the function is idential to HashTable::strToInt()
-unsigned int BloomFilter::strToInt(std::string element) const {
-    unsigned int result = 0;
-    for (unsigned int i = 0; i < element.length(); i++)
-        result += element[i] * pow(31, i);
-    return result;
 }
 
 // returns true if the element is in the BloomFilter.
