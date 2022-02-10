@@ -1,5 +1,5 @@
 Testing values:
-c = 2.500000
+c = 10.000000
 d = 1.000000
 Probability of false positive:
-0.106000
+1.000000

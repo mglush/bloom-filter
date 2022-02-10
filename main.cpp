@@ -95,7 +95,7 @@ int main(int argc, char *argv[]) {
     printFinalStatistics(totalFalseNeg, totalFalsePos);
 
     // finally, we create 10 test files for 10 different setups that we use.
-    for (int i = 1; i < 11; i++) {
+    for (int i = 1; i < 14; i++) {
         std::string filename = "./setup_files/setup" + std::to_string(i) + ".txt";
         makeTestFile(filename);
     }

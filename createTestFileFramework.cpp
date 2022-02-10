@@ -97,8 +97,7 @@ void makeTestFile(std::string setup) {
 
     // record the total statistics in the output<test#>.txt file.
     outFile.open(outputFileName);
-    outFile << "Number of false negatives:\n" << std::to_string(totalFalseNeg) << "\n";
-    outFile << "Number of false positives:\n" << std::to_string(totalFalsePos) << "\n";
-    outFile << "Probability of false positives:\n" << std::to_string(totalFalsePos / 1000.0);
+    outFile << "Testing values:\nc = " << std::to_string(c) << "\nd = " << std::to_string(d) << "\n";
+    outFile << "Probability of false positive:\n" << std::to_string(totalFalsePos / 1000.0);
     outFile.close();
 }

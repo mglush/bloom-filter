@@ -1,6 +1,5 @@
-Number of false negatives:
-0
-Number of false positives:
-10
-Probability of false positives:
+Testing values:
+c = 1.000000
+d = 1.250000
+Probability of false positive:
 0.010000
