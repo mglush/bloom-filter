@@ -1,5 +1,0 @@
-Testing values:
-c = 1.000000
-d = 5.000000
-Probability of false positive:
-0.065000
