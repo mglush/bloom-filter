@@ -1,6 +1,4 @@
-# C++ Bloom Filter Implementation
+# Bloom Filter Implementation in C++.
+#### By Michael Glushchenko for UCSB CS130a Winter 2022 (Data Structure Algorithms I)
 
-A space-efficient data structure that allows for O(1) find() operations.
-
-PA01 Assignment for UCSB CS130A: Data Structure Algorithms I (Winter 2022).
-By Michael Glushchenko.
+A space-efficient, probabilistic data structure that allows for constant-time find() operations.
