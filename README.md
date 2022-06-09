@@ -2,10 +2,10 @@
 #### By Michael Glushchenko for UCSB CS130a Winter 2022 (Data Structure Algorithms I)
 
 ## Table of Contents
-* [How To Run](https://github.com/mglush/compiler-construction/blob/main/README.md#how-to-run)
-* [Use BloomFilter in Your Project](https://github.com/mglush/compiler-construction/blob/main/README.md#use-bloom-filter-in-your-project)
-* [Project Notes](https://github.com/mglush/compiler-construction/blob/main/README.md#project-notes)
-* [Report](https://github.com/mglush/compiler-construction/blob/main/README.md#report)
+* [How To Run](https://github.com/mglush/bloom-filter/blob/main/README.md#how-to-run)
+* [Use BloomFilter in Your Project](https://github.com/mglush/bloom-filter/blob/main/README.md#use-bloom-filter-in-your-project)
+* [Project Notes](https://github.com/mglush/bloom-filter/blob/main/README.md#project-notes)
+* [Report](https://github.com/mglush/bloom-filter/blob/main/README.md#report)
 
 ## How to Run
 To run the project as is:
