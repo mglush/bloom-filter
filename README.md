@@ -10,7 +10,7 @@
 ## How to Run
 To run the project as is:
 ~~~
-git clone https://github.com/mglush/bloom-filter    # clone repository.
+git clone git@github.com:mglush/bloom-filter.git    # clone repository.
 cd bloom-filter                                     # enter repository folder.
 make clean && make                                  # create the bloom filter executable named PA1.out
 ./PA1.out file_1 file_2 file_3 file_4 file_5        # run the exectuable
