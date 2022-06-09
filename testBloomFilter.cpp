@@ -14,11 +14,11 @@
 #include <string>
 #include <sstream>
 
-#include "testBloomFilter.h"
-#include "testFramework.h"
-#include "BloomFilter.h"
-#include "HashTable.h"
-#include "utilities.h"
+#include "testBloomFilter.hpp"
+#include "testFramework.hpp"
+#include "BloomFilter.hpp"
+#include "HashTable.hpp"
+#include "utilities.hpp"
 
 int main() {
     std::cout << "Running testBloomFilter file!" << std::endl << std::endl;

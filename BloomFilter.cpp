@@ -1,5 +1,7 @@
-#include "BloomFilter.h"
-#include "utilities.h"
+// BloomFilter.cpp
+
+#include "BloomFilter.hpp"
+#include "utilities.hpp"
 #include <string>
 #include <cmath>
 

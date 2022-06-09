@@ -1,4 +1,4 @@
-// testFramework.h
+// testFramework.hpp
 // the file contains a general framework for running test files in this project.
 
 #ifndef TEST_FRAMEWORK_H

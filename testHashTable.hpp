@@ -1,4 +1,4 @@
-// testHashTable.h
+// testHashTable.hpp
 // the file contains the declarations of all the tests that will be run on BloomFilter
 
 #ifndef TEST_HASHTABLE_H

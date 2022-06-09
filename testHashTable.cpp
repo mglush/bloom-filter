@@ -11,10 +11,10 @@
 #include <string>
 #include <iostream>
 
-#include "testHashTable.h"
-#include "testFramework.h"
-#include "HashTable.h"
-#include "utilities.h"
+#include "testHashTable.hpp"
+#include "testFramework.hpp"
+#include "HashTable.hpp"
+#include "utilities.hpp"
 
 int main() {
     std::cout << "Running testHashTable file!" << std::endl << std::endl;

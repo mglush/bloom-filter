@@ -1,3 +1,5 @@
+// createTestFileFramework.hpp
+
 #ifndef CREATE_TESTFILE_FRAMEWORK_H
 #define CREATE_TESTFILE_FRAMEWORK_H
 
@@ -7,8 +9,8 @@
 #include <utility>
 
 #include "math.h"
-#include "BloomFilter.h"
-#include "HashTable.h"
+#include "BloomFilter.hpp"
+#include "HashTable.hpp"
 
 void makeTestFile(std::string fileName);
 void printTestValues(double p, float c, float d, int q);

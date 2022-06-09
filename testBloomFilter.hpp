@@ -1,4 +1,4 @@
-// testBloomFilter.h
+// testBloomFilter.hpp
 // the file contains the declarations of all the tests that will be run on BloomFilter
 
 #ifndef TEST_BLOOMFILTER_H

@@ -1,5 +1,7 @@
-#include "createTestFileFramework.h"
-#include "utilities.h"
+// createTestFileFramework.cpp
+
+#include "createTestFileFramework.hpp"
+#include "utilities.hpp"
 #include <cmath>
 
 void printTestValues(double p, float c, float d, int q) {

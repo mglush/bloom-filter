@@ -1,7 +1,7 @@
 // HashTable.cpp
 
-#include "HashTable.h"
-#include "utilities.h"
+#include "HashTable.hpp"
+#include "utilities.hpp"
 #include <string>
 #include <iostream>
 #include <cmath>

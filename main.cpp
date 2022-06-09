@@ -5,10 +5,10 @@
 #include <cmath>
 
 #include "math.h"
-#include "BloomFilter.h"
-#include "HashTable.h"
-#include "utilities.h"
-#include "createTestFileFramework.h"
+#include "BloomFilter.hpp"
+#include "HashTable.hpp"
+#include "utilities.hpp"
+#include "createTestFileFramework.hpp"
 
 int main(int argc, char *argv[]) {
     double p;

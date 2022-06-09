@@ -3,7 +3,7 @@
 // utilized by both the BloomFilter class and the
 // HashTable class.
 
-#include "utilities.h"
+#include "utilities.hpp"
 #include <string>
 #include <cmath>
 

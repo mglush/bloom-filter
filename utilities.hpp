@@ -1,4 +1,4 @@
-// utilities.h
+// utilities.hpp
 // the file contains functions used by both
 // the BloomFilter class and the HashTable class.
 
