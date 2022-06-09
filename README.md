@@ -10,10 +10,10 @@
 ## How to Run
 To run the project as is:
 ~~~
-git clone https://github.com/mglush/bloom-filter          # clone repository.
-cd bloom-filter                                           # enter repository folder.
-make clean && make                                        # create the bloom filter executable by the name of PA1.out
-./PA1.out file_1 file_2 file_3 file_4 file_5              # run the exectuable
+git clone https://github.com/mglush/bloom-filter    # clone repository.
+cd bloom-filter                                     # enter repository folder.
+make clean && make                                  # create the bloom filter executable named PA1.out
+./PA1.out file_1 file_2 file_3 file_4 file_5        # run the exectuable
 ~~~
 Meaning of the input files above:
   - 'file_1' contains, each on a separate line, p (desired probability of a false positive), m (expected number of strings to be inserted), c (scale factor of the bloom filter size), and d (scale factor of number of hash functions). Keeping c and d at 1 works just fine.
