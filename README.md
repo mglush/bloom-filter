@@ -38,4 +38,5 @@ Titled PA1_report.pdf, the paper explains somee aspects of the bloom filter impl
 
 The report then examines two relationships. First, it examines how to size of the bloom filter affects the false positive probability of a find() operation. Next, the same is done for the relationship between the number of hash functions used and the false positive probability of a find() operation.
 
+All files in this project were created and implemented by myself.
 Michael Glushchenko &copy; 2022
